@@ -21,9 +21,17 @@ pipeline {
                     . venv/bin/activate
                     pip install --upgrade pip
                     pip install -r requirements.txt
-                    pytest -v
+                    pytest -v --alluredir=./allure-results
                 '''
             }
+        }
+
+        stage('Generate Allure Report') {
+        allure([
+            includeProperties: false,
+            jdk: '',
+            results: [[path: 'allure-results']]
+            ])
         }
 
         stage('Show commit') {
@@ -33,3 +41,5 @@ pipeline {
         }
     }
 }
+
+
