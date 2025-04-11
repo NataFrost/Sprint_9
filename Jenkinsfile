@@ -25,13 +25,14 @@ pipeline {
                 '''
             }
         }
-
         stage('Generate Allure Report') {
-        allure([
-            includeProperties: false,
-            jdk: '',
-            results: [[path: 'allure-results']]
-            ])
+            steps {
+                allure([
+                    includeProperties: false,
+                    jdk: '',
+                    results: [[path: 'allure-results']]
+                ])
+           }
         }
 
         stage('Show commit') {
